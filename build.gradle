@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'org.evolib2'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+    compile group: 'org.processing', name: 'core', version: '3.3.7'
+    compile 'org.reflections:reflections:0.9.12'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testCompile 'org.mockito:mockito-junit-jupiter:2.23.0'
+}
+
+task buildAndCopyJars(type: Copy) {
+    from 'build/libs/'
+    into 'src/main/resources/EVO_2/code'
+}
+
+test {
+    useJUnitPlatform()
+}
