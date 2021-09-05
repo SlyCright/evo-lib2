@@ -14,7 +14,7 @@ public class World implements Ticker {
 
     public static final int WORLD_HEIGHT = 666;
 
-    public static final int SPECIMENS_TOTAL = 3;
+    public static final int SPECIMENS_TOTAL = 1;
 
     private final List<Ticker> tickers = new ArrayList<>();
 

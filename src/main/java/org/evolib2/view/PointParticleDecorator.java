@@ -7,7 +7,7 @@ import org.evolib2.model.worlds.PointParticle;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PointParticleDecorator extends DisplayableDecorator {
+public abstract class PointParticleDecorator extends SpecimenComponentDecorator {
 
     @Adjustable
     public final static boolean CIRCLE_NO_STROKE_MODE = true;

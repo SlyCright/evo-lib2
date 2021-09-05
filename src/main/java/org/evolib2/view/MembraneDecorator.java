@@ -10,7 +10,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembraneDecorator extends DisplayableDecorator implements NeuronEmbed, Ticker {
+public class MembraneDecorator extends SpecimenComponentDecorator implements NeuronEmbed, Ticker {
 
     public final static int MEMBRANE_HUE = 0; // 0/3 of 360
 

@@ -17,16 +17,16 @@ public class Visualizer implements Displayable, Ticker {
     public final int BACKGROUND_BLUE = (int) (Math.random() * 256.0 / 4.0);
 
     @Getter
-    int worldWidth;
+    private int worldWidth;
 
     @Getter
-    int worldHeight;
+    private int worldHeight;
 
-    List<Displayable> displayable;
+    private List<Displayable> displayable;
 
-    List<PointParticle> pointParticles;
+    private List<PointParticle> pointParticles;
 
-    List<Ticker> displayableTickers;
+    private List<Ticker> displayableTickers;
 
     public Visualizer(World world) {
         this.displayable = DisplayablesFactory.createDisplayablesOf(world);

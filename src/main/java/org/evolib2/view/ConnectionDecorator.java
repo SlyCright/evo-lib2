@@ -13,7 +13,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectionDecorator extends DisplayableDecorator implements Displayable, Ticker {
+public class ConnectionDecorator extends SpecimenComponentDecorator implements Displayable, Ticker {
 
     @Adjustable
     public final static int CONNECTION_HUE = 360 / 3; // 1/3 of 360

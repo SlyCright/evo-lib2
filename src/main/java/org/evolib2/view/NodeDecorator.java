@@ -7,7 +7,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodeDecorator extends DisplayableDecorator {
+public class NodeDecorator extends SpecimenComponentDecorator {
 
     @Adjustable
     public final static int NODE_HUE = 0; // 0/3 of 360

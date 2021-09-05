@@ -25,6 +25,7 @@ public class DisplayablesFactory {
     private static List<Displayable> generateDisplayables(World world) {
         List<Displayable> displayables = new ArrayList<>();
 
+
         List<ConnectionDecorator> connectionDecorators = new ArrayList<>();
 
         world.getSpecimens().forEach(specimen -> {
@@ -33,6 +34,8 @@ public class DisplayablesFactory {
             specimen.getSensors().forEach(s -> displayables.add(new SensorDecorator(s)));
             specimen.getANeurons().forEach(an -> displayables.add(new ANeuronDecorator(an)));
             specimen.getConnections().forEach(c -> displayables.add(new ConnectionDecorator(c)));
+
+            displayables.add(new SpecimenDecorator(specimen));
         });
 
         return displayables;

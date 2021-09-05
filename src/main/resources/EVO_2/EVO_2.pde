@@ -12,7 +12,7 @@ color backgroundColor=color(
 int wdth=visualizer.getWorldWidth();
 int hght=visualizer.getWorldHeight();
 
-boolean buttonPressed=false;
+boolean buttonPressed=true;
 
 void settings() {
   size(wdth, hght);
