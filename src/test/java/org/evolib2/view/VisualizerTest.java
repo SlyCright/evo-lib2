@@ -46,7 +46,7 @@ class VisualizerTest {
 
         Simulation simulation = new Simulation();
         Visualizer visualizer = simulation.getVisualizer();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 50_000; i++) {
             simulation.doTick();
             visualizer.doTick();
             List<ShapeDto> shapeDtos = visualizer.getShapeDtos();

@@ -14,11 +14,11 @@ public class SpecimenDecorator implements Displayable {
 
     public final static int POSITION_MARK_HUE = 60; //  of 360
 
-    public final static float POSITION_MARK_DIAMETER_START = 5f;
+    public final static float POSITION_MARK_DIAMETER_START = 2.5f;
 
-    public final static float POSITION_MARK_DIAMETER_END = 25f;
+    public final static float POSITION_MARK_DIAMETER_END = 1f;
 
-    public final static int POSITION_MARKS_TOTAL = 30;
+    public final static int POSITION_MARKS_TOTAL = 500;
 
     private final Specimen specimen;
 
@@ -37,16 +37,7 @@ public class SpecimenDecorator implements Displayable {
 
         List<ShapeDto> shapeDtos = new ArrayList<>();
 
-        if (counter == 0) {
-            positions.add(0, this.specimen.getPosition().copy());
-        }
-
-        counter++;
-
-        if (counter > 30) {
-            counter = 0;
-        }
-
+        positions.add(0, this.specimen.getPosition().copy());
 
         if (positions.size() > POSITION_MARKS_TOTAL) {
             positions.remove(positions.size() - 1);
@@ -56,9 +47,9 @@ public class SpecimenDecorator implements Displayable {
 
             PVector vector = positions.get(i);
 
-            vector.x += (random.nextFloat() - 0.5f) * .50f;
+//            vector.x += (random.nextFloat() - 0.5f) * .50f;
 
-            vector.y += (random.nextFloat() - 0.5f) * .50f;
+//            vector.y += (random.nextFloat() - 0.5f) * .50f;
 
             shapeDtos.add(new CircleDto(
                     IS_NO_STROKE_POSITION_MARK,

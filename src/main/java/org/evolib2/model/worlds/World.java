@@ -2,7 +2,6 @@ package org.evolib2.model.worlds;
 
 import lombok.Getter;
 import org.evolib2.controller.Ticker;
-import org.evolib2.model.evolution.Evolutioner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +13,7 @@ public class World implements Ticker {
 
     public static final int WORLD_HEIGHT = 666;
 
-    public static final int SPECIMENS_TOTAL = 1;
-
-    private final List<Ticker> tickers = new ArrayList<>();
+    public static final int SPECIMENS_TOTAL = 3;
 
     @Getter
     private List<Specimen> specimens;
@@ -27,50 +24,28 @@ public class World implements Ticker {
 
     private void createSpecimens() {
         specimens = SpecimensFactory.create(SPECIMENS_TOTAL);
-        tickers.addAll(specimens);
     }
 
     public void doTick() {
 
-        evaluate(specimens);
+       specimens= evaluate(specimens);
 
         Friction.affect(specimens);
         Flow.affect(specimens);
 
-        for (Ticker ticker : tickers) {
-            ticker.doTick();
-        }
-
+        specimens.forEach(Specimen::doTick);
     }
 
-    private void evaluate(List<Specimen> specimens) {
+    private List<Specimen> evaluate(List<Specimen> specimens) {
 
-        int specimensTotal = specimens.size();
-        List<Specimen> ancestors = new ArrayList<>();
+        List<Specimen> specimensToCheck = specimens;
+        specimens = new ArrayList<>();
 
-        specimens.forEach(specimen -> {
-            if (specimen.getPosition().x > WORLD_WIDTH) {
-                ancestors.add(specimen);
-                specimens.remove(specimen);
-            }
-        });
-
-        if (specimens.size() != 0) {
-            while (specimens.size() < specimensTotal) {
-                Specimen ancestor = getRandomSpecimenOf(specimens);
-                Specimen offspring = Evolutioner.makeOffspringOf(ancestor);
-                specimens.add(offspring);
-            }
-        } else {
-            while (specimens.size() < specimensTotal) {
-                Specimen ancestor = getRandomSpecimenOf(ancestors);
-                Specimen offspring = Evolutioner.makeOffspringOf(ancestor);
-                specimens.add(offspring);
+        for (Specimen specimen : specimensToCheck) {
+            if (specimen.getPosition().x < WORLD_WIDTH) {
+                specimens.add(specimen);
             }
         }
-    }
-
-    private Specimen getRandomSpecimenOf(List<Specimen> specimens) {
-        return specimens.get(new Random().nextInt(specimens.size()));
+        return  specimens;
     }
 }
