@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Flow {
 
-    public final static float FLOW_FORCE_MAGNITUDE = .05f;
+    public final static float FLOW_FORCE_MAGNITUDE = 0.05f;
 
     private static PVector flowForceVector = new PVector(FLOW_FORCE_MAGNITUDE, 0f);
 

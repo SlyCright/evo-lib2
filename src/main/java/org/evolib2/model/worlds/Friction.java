@@ -1,5 +1,6 @@
 package org.evolib2.model.worlds;
 
+import org.jetbrains.annotations.NotNull;
 import processing.core.PVector;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class Friction {// TODO: 11.08.2021 refactor: friction should be applied 
         }
     }
 
-    public static void affect(PointParticle pointParticle, float frictionFactor) {
+    public static void affect(@NotNull PointParticle pointParticle, float frictionFactor) {
         PVector velocity = pointParticle.getVelocity();
         float velocityMagnitude = velocity.mag();
         float frictionForceMagnitude = frictionFactor * velocityMagnitude;

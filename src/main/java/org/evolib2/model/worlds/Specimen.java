@@ -1,7 +1,9 @@
 package org.evolib2.model.worlds;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.evolib2.controller.Ticker;
+import processing.core.PConstants;
 import processing.core.PVector;
 
 import java.util.List;
@@ -29,7 +31,11 @@ public class Specimen implements Ticker {
     private final List<Connection> connections;
 
     @Getter
+    @Setter
     PVector position = new PVector();
+
+    @Getter
+    private float fitness = 0f;
 
     public Specimen(
             List<SpecimenComponent> specimenComponents,
@@ -63,6 +69,14 @@ public class Specimen implements Ticker {
         nodes.forEach(Node::doTick);
 
         updatePosition();
+        updateFitness();
+    }
+
+    private void updateFitness() {
+
+        PVector center = new PVector(World.WORLD_WIDTH / 2f, World.WORLD_HEIGHT / 2f);
+        PVector fitnessVector = PVector.sub(this.position, center);
+        this.fitness = PVector.angleBetween(new PVector(1f, 0), fitnessVector) ;
     }
 
     private void updatePosition() {
@@ -70,15 +84,15 @@ public class Specimen implements Ticker {
         float x = 0f;
         float y = 0f;
 
-        for(Node node: this.nodes){
-            x+=node.getPosition().x;
-            y+=node.getPosition().y;
+        for (Node node : this.nodes) {
+            x += node.getPosition().x;
+            y += node.getPosition().y;
         }
 
-        x/=(float) nodes.size();
-        y/=(float) nodes.size();
+        x /= (float) nodes.size();
+        y /= (float) nodes.size();
 
-        position.x=x;
-        position.y=y;
+        position.x = x;
+        position.y = y;
     }
 }

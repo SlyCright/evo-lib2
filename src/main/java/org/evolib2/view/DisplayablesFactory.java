@@ -25,7 +25,6 @@ public class DisplayablesFactory {
     private static List<Displayable> generateDisplayables(World world) {
         List<Displayable> displayables = new ArrayList<>();
 
-
         List<ConnectionDecorator> connectionDecorators = new ArrayList<>();
 
         world.getSpecimens().forEach(specimen -> {
@@ -65,7 +64,7 @@ public class DisplayablesFactory {
         return displayables.stream()
                 .filter(d -> d instanceof NeuronEmbed)
                 .map(d -> (NeuronEmbed) d)
-                .filter(ne -> neuron == ne.getNeuron())
+                .filter(ne -> neuron.equals(ne.getNeuron()))
                 .findFirst()
                 .get();
     }
@@ -89,7 +88,7 @@ public class DisplayablesFactory {
 
     public static List<PointParticle> extractPointParticles(List<Ticker> displayableTickers) {
 
-        HashSet<PointParticle> pointParticlesSet = new HashSet();
+        HashSet<PointParticle> pointParticlesSet = new HashSet<>();
 
         displayableTickers.stream()
                 .filter(dt -> dt instanceof ConnectionDecorator)
@@ -104,8 +103,8 @@ public class DisplayablesFactory {
         displayableTickers.stream()
                 .filter(dt -> dt instanceof MembraneDecorator)
                 .map(dt -> (MembraneDecorator) dt)
-                .map(md -> md.getMembraneParticle())
-                .forEach(mp -> pointParticlesList.add(mp));
+                .map(MembraneDecorator::getMembraneParticle)
+                .forEach(pointParticlesList::add);
 
         return pointParticlesList;
     }

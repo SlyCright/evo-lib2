@@ -16,6 +16,8 @@ public class Visualizer implements Displayable, Ticker {
 
     public final int BACKGROUND_BLUE = (int) (Math.random() * 256.0 / 4.0);
 
+    private World world;
+
     @Getter
     private int worldWidth;
 
@@ -29,6 +31,11 @@ public class Visualizer implements Displayable, Ticker {
     private List<Ticker> displayableTickers;
 
     public Visualizer(World world) {
+        updateWhole(world);
+    }
+
+    public void updateWhole(World world) {
+        this.world = world;
         this.displayable = DisplayablesFactory.createDisplayablesOf(world);
         this.displayableTickers = DisplayablesFactory.extractDispalayableTickers(displayable);
         this.pointParticles = DisplayablesFactory.extractPointParticles(displayableTickers);
@@ -38,6 +45,9 @@ public class Visualizer implements Displayable, Ticker {
 
     @Override
     public void doTick() {
+        if (this.world.isUpdateNeeded()) {
+            updateWhole(this.world);
+        }
         PointParticlesInteractionForces.affectRepulsion(pointParticles);
         displayableTickers.forEach(Ticker::doTick);
     }

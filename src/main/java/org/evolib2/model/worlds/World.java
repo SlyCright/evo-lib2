@@ -2,6 +2,7 @@ package org.evolib2.model.worlds;
 
 import lombok.Getter;
 import org.evolib2.controller.Ticker;
+import org.evolib2.model.evolution.Evolutioner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ public class World implements Ticker {
     @Getter
     private List<Specimen> specimens;
 
+    @Getter
+    boolean isUpdateNeeded=false;
+
     public World() {
         createSpecimens();
     }
@@ -28,7 +32,7 @@ public class World implements Ticker {
 
     public void doTick() {
 
-       specimens= evaluate(specimens);
+        specimens = evaluate(specimens);
 
         Friction.affect(specimens);
         Flow.affect(specimens);
@@ -42,10 +46,17 @@ public class World implements Ticker {
         specimens = new ArrayList<>();
 
         for (Specimen specimen : specimensToCheck) {
-            if (specimen.getPosition().x < WORLD_WIDTH) {
-                specimens.add(specimen);
+            if (specimen.getPosition().x > WORLD_WIDTH) {
+                Random rand = new Random();
+                Specimen specimenA = specimensToCheck.get(rand.nextInt(specimensToCheck.size()));
+                Specimen specimenB = specimensToCheck.get(rand.nextInt(specimensToCheck.size()));
+                Specimen winner = specimenA.getFitness() > specimenB.getFitness() ? specimenA : specimenB;
+                specimen = Evolutioner.makeOffspringOf(winner);
+                isUpdateNeeded=true;
             }
+            specimens.add(specimen);
         }
-        return  specimens;
+
+        return specimens;
     }
 }
